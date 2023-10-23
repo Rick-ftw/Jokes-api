@@ -14,7 +14,7 @@ The ResponsiveWebsite project aims to create a user-friendly website that dynami
 - CSS3
 - Ejs
 - No frameworks used
-- 
+  
  ## Backend 
 - Node
 - Express
