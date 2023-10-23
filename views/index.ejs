@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes API</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <% if (locals.content) { %>
+
+        
+        <h2 class="heading">            
+            <% if (locals.content.category )  { %>                <!-- if theres is content category -->
+                Category: <%= content.category %>
+            <% } else if (locals.content.error == true ) { %>    <!-- if theres is an error in content -->
+                <%= content.message %>
+            <% } else { %>
+                We provide the best JOKES🤡                                 <!-- Default heading --> 
+            <% } %>
+        </h2>
+
+
+        <div class="container">
+            <form id="myform" method="post">
+                <select name="type" class="form-select">
+                    <option class="drop-down-menu default" value="any" data-display="Select">Random type</option>
+                    <option class="drop-down-menu" value="programming">Programming</option>
+                    <option class="drop-down-menu" value="misc">Misc</option>
+                    <option class="drop-down-menu" value="dark">Dark</option>
+                    <option class="drop-down-menu" value="pun">Pun</option>
+                    <option class="drop-down-menu" value="spooky">Spooky</option>
+                    <option class="drop-down-menu" value="christmas">Christmas</option>
+                </select>
+                <div class="info-container">
+
+                    <h5 class="info">Error: <%= content.error %></h5>
+
+                    <h5 class="info joke">
+                    <% if(locals.content.joke) { %>
+                        Joke: <%= content.joke %>
+                        <% } else { %>
+                            No jokes found with this current filter                        
+                        <% } %>
+                    </h5>
+
+                    <% if(locals.content.flags) { %>
+                    <h5 class="info">Explicit: <%= content.flags.explicit %></h5>
+                    <h5 class="info">ID: <%= content.id %></h5>
+                    <h5 class="info">Racist: <%= content.flags.racist %></h5>
+                    <% } %>
+                </div>
+                <!-- <label for="submit">Click Here to Get Joke: </label> -->
+                <input type="submit" value="GET JOKE" formaction="/get-joke"></input>
+            </form>
+        </div>
+        <% } else{ %>
+            <!-- When there is an error in the production -->
+            <h2 >
+                Not found anything
+            </h2>
+        <% } %>
+
+<%- include("footer.ejs") %>
+</body>
+</html>
